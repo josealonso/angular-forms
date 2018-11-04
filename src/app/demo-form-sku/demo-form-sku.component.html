@@ -8,10 +8,10 @@
     <div class="field"
         [class.error]="!sku.valid && sku.touched">
       <label for="skyInput">SKU</label>
-      <input type="text" id="skuInput" placeholder="SKU" [formControl]="sku">
-      <div *ngIf="!sku.valid"
+      <input type="text" id="skuInput" placeholder="SKU" [formControl]="myForm.controls['sku']">
+      <div *ngIf="!myForm.controls['sku'].valid"
         class="ui error message">SKU is invalid</div>
-      <div *ngIf="sku.hasError('required')"
+      <div *ngIf="myForm.controls['sku'].hasError('required')"
         class="ui error message">SKU is required</div>
     </div>
 

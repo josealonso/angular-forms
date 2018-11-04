@@ -8,14 +8,14 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
 })
 export class DemoFormSkuComponent {
 	myForm: FormGroup;
-	sku: AbstractControl;
+	// sku: AbstractControl;
 
 	constructor(fb: FormBuilder) {
 		this.myForm = fb.group({
 			sku: [ '', Validators.required ]
 		});
 
-		this.sku = this.myForm.controls['sku'];
+		// this.sku = this.myForm.controls['sku'];
 	}
 
 	onsubmit(value: string): void {
