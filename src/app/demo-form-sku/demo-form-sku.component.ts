@@ -1,5 +1,19 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms';
+
+/**
+ * Our custom validator
+ *
+ * A validator:
+ * - Takes a `Control` as it's input and
+ * - Returns a `StringMap<string, boolean>` where the key is "error code" and
+ *   the value is `true` if it fails
+ */
+function skuValidator(control: FormControl): { [s: string]: boolean } {
+	if (!control.value.match(/^123/)) {
+		return { invalidSku: true };
+	}
+}
 
 @Component({
 	selector: 'app-demo-form-sku',
@@ -8,17 +22,17 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
 })
 export class DemoFormSkuComponent {
 	myForm: FormGroup;
-	// sku: AbstractControl;
+	sku: AbstractControl;
 
 	constructor(fb: FormBuilder) {
 		this.myForm = fb.group({
-			sku: [ '', Validators.required ]
+			sku: [ '', Validators.compose([ Validators.required, skuValidator ]) ]
 		});
 
-		// this.sku = this.myForm.controls['sku'];
+		this.sku = this.myForm.controls['sku'];
 	}
 
-	onsubmit(value: string): void {
+	onSubmit(value: string): void {
 		console.log('you submitted value:', value);
 	}
 }
