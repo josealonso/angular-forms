@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 /**
  * Our custom validator
@@ -9,11 +9,6 @@ import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl } from
  * - Returns a `StringMap<string, boolean>` where the key is "error code" and
  *   the value is `true` if it fails
  */
-function skuValidator(control: FormControl): { [s: string]: boolean } {
-	if (!control.value.match(/^123/)) {
-		return { invalidSku: true };
-	}
-}
 
 @Component({
 	selector: 'app-demo-form-sku',
@@ -22,26 +17,26 @@ function skuValidator(control: FormControl): { [s: string]: boolean } {
 })
 export class DemoFormSkuComponent {
 	myForm: FormGroup;
-	sku: AbstractControl;
+	productName: string;
 
 	constructor(fb: FormBuilder) {
 		this.myForm = fb.group({
-			sku: [ '', Validators.required ]
+			'productName': [ '', Validators.required ]
 		});
 
-		this.sku = this.myForm.controls['sku'];
+		// this.sku = this.myForm.controls['sku'];
 
-		this.sku.valueChanges.subscribe(
-			(value: string) => {
-				console.log('sku changed to:', value);
-			}
-		)
+		// this.sku.valueChanges.subscribe(
+		// 	(value: string) => {
+		// 		console.log('sku changed to:', value);
+		// 	}
+		// )
 
-		this.myForm.valueChanges.subscribe(
-			(form: any) => {
-				console.log('form changed to:', form);
-			}
-		)
+		// this.myForm.valueChanges.subscribe(
+		// 	(form: any) => {
+		// 		console.log('form changed to:', form);
+		// 	}
+		// )
 	}
 
 	onSubmit(value: string): void {
